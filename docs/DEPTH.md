@@ -29,6 +29,10 @@
 | TRAP-21 | 真实边界输入 | 朴素处理会错分 | 保留证据并稳定裁决 | `app/modules/m2_paths/core.py` | `tests/test_m2_paths.py::test_trap_2` |
 | TRAP-22 | 真实边界输入 | 朴素处理会错分 | 保留证据并稳定裁决 | `app/modules/m3_objects/core.py` | `tests/test_m3_objects.py::test_trap_2` |
 | TRAP-23 | 真实边界输入 | 朴素处理会错分 | 保留证据并稳定裁决 | `app/modules/m4_partitions/core.py` | `tests/test_m4_partitions.py::test_trap_2` |
+| TRAP-24 | 大小相同混用分片标识与内容摘要 | 按值比对会互相顶替 | 契约内只认本类证据 | `app/contracts.py` | `tests/test_contract_upgrade.py::test_same_size_does_not_mix_proofs` |
+| TRAP-25 | 升级后在途清单被按新契约重判 | 全局版本即时生效 | 接收时绑定版本，重试沿用 | `app/store.py` | `tests/test_contract_upgrade.py::test_inflight_manifest_keeps_bound_version` |
+| TRAP-26 | 迁移中断后重复或丢失记录 | 全量重跑 | 游标续跑，缺旧证据拒绝猜测补齐 | `app/modules/m3_objects/core.py` | `tests/test_contract_upgrade.py::test_migration_resume_after_interrupt` |
+| TRAP-27 | 重试堆叠核验记录 | 追加写入 | 按 (清单, 行号) 就地更新 | `app/store.py` | `tests/test_contract_upgrade.py::test_retry_adds_no_new_records` |
 
         ## 对账规则
 

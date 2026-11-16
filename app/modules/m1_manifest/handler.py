@@ -8,5 +8,5 @@ def page(request: Request):
     return request.app.state.templates.TemplateResponse(request, "m1_manifest.html", {"title": "清单采信", "data": data})
 
 @router.post("/api/manifests/import")
-def api(payload: dict = Body(default={})):
-    return execute(payload or None)
+def api(request: Request, payload: dict = Body(default={})):
+    return execute({**payload, "store": request.app.state.store})
